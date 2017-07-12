@@ -51,7 +51,7 @@ int main()
 		}
 
 		
-		if (tranc_decimals >= 1)
+		if (tranc_decimals >= 1 && exchange_cost == 0.0)
 		{
 			int diff_int = tranc_decimals;
 			exchange_cost += float(diff_int)/float(100);
