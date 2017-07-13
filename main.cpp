@@ -22,11 +22,21 @@ int main()
 		// calculate sum at the same time
 		for (int i = 0; i < size; i++)	
 		{
+			/* 9.44 become 943.99 after multiplying by 100.0
+			 * examine later
 			float temp;
 			// 9.44 become 943 in this way
 			scanf("%f", &temp); // don't forget &
+			temp *= 100;	
+			printf("temp is %f\n", temp);
 			costs[i] = temp * 100; // .00 * 100 make num integer
 			printf("before %d\n : ", costs[i]);
+			sum += costs[i];
+			*/
+			int dollar;
+			int cent;
+			scanf("%d.%d", &dollar, &cent);
+			costs[i] = dollar*100 + cent;
 			sum += costs[i];
 		}
 
@@ -36,10 +46,6 @@ int main()
 
 		// needs to be float since it store with original formant dollar.cents
 		float positive = 0.0, negative = 0.0;
-
-		for (int i = 0; i < size; i++) {
-			         printf("after : $%d\n", costs[i]);
-		 }
 
 		for (int i = 0; i < size; i++)
 		{
