@@ -30,15 +30,15 @@ int main()
 
 		// get average cost
 		// don't forget change size to float
-		float average_cost = (float)sum / (float)size;
+		double average_cost = (double)sum / (double)size;
 
 		// needs to be float since it store with original formant dollar.cents
-		float positive = 0.0, negative = 0.0;
+		double positive = 0.0, negative = 0.0;
 
 		for (int i = 0; i < size; i++)
 		{
 			// want to ignore the .decimals so change to int
-			float difference = costs[i] - average_cost;
+			double difference = costs[i] - average_cost;
 			if (difference >= 0)
 				positive += ((int)difference) / 100.0;
 			else
@@ -51,6 +51,4 @@ int main()
 		else
 			printf("$%.2f\n", negative);
 	}
-
-	return 0;
-}
+return 0; }
