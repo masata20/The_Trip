@@ -7,22 +7,24 @@ int main()
 
 	// maximum = 1000
 	unsigned short int size;
-	float exchange_costs[1000];
 	int counter = 0;
 	// input the number of people
 	while (scanf("%hu", &size), size)
 	{
 		// Create array which can contain costs
 		// max cost is $10000.00
-		// float is shortest decimal data type in c++
-		float costs[size];
-		float sum = 0.0;
+		// use integer type so that it store the input value *100 since we need to care up to 1 cent
+		// it makes easier not to deal with decimals
+		int costs[size];
+		int sum = 0;
 
 		// input the cost n times, and store in array	
 		// calculate sum at the same time
 		for (int i = 0; i < size; i++)	
 		{
-			scanf("%f", &costs[i]);
+			float temp;
+			scanf("%f", &temp); // don't forget &
+			costs[i] = temp * 100; // .00 * 100 make num integer
 			sum += costs[i];
 		}
 
@@ -30,53 +32,26 @@ int main()
 		// don't forget change size to float
 		float average_cost = sum / (float)size;
 
-		float exchange_cost = 0.0;
+		// needs to be float since it store with original formant dollar.cents
+		float positive = 0.0, negative = 0.0;
 
-		float tranc_decimals = 0.0;
-		// calculate the diff of each with average, need to cut off after 2 decimals
-		// add up the only positive diffences
-		// or do only half of them iff it's sorted(maybe slower than above)
+
 		for (int i = 0; i < size; i++)
 		{
-			float diff = average_cost - costs[i];
-			//printf("row difference is %.5f\n", diff);
-			if(diff > 0.0)
-			{
-				// trancate after 2 decimals
-				float temp = diff * 100;
-				int diff_int = temp;
-				tranc_decimals += temp - diff_int;
-				float trancated_diff = float(diff_int)/float(100);
-
-				exchange_cost += trancated_diff;
-			}
-
-
-		}
-	//	printf("rvalue is %.5f\n", exchange_cost);	
-
-		// float rounded_up = ceilf(exchange_cost * 100) / 100; 	
-		// printf("rounded_up value is %.5f\n", rounded_up);
-		
-		int x = exchange_cost*100;
-		//cout << "x is " << x << endl;
-		int deci = x%10;
-		//cout << "dece is " << deci << endl;
-		// Dont want to add when .09
-		if (tranc_decimals >= 1 && deci != 9)
-		{
-		// cout << "You reading this" << endl;
-			int diff_int = tranc_decimals;
-			exchange_cost += float(diff_int)/float(100);
-		
+			// want to ignore the .decimals so change to int
+			int difference = costs[i] - average_cost;
+			if (difference > 0)
+				positive += difference / 100.0;
+			else
+				negative += -1*(difference / 100.0);
 		}
 
-		exchange_costs[counter] = exchange_cost;
-		counter++;
+		// explain why later
+		if (positive > negative)
+			printf("$%.2f\n", positive);
+		else
+			printf("$%.2f\n", negative);
 	}
-	for (int i = 0; i < counter; i++)
-		printf("$%.2f\n", exchange_costs[i]);
-
 
 	return 0;
 }
