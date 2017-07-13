@@ -7,7 +7,6 @@ int main()
 
 	// maximum = 1000
 	unsigned short int size;
-	int counter = 0;
 	// input the number of people
 	while (scanf("%hu", &size), size)
 	{
@@ -22,17 +21,6 @@ int main()
 		// calculate sum at the same time
 		for (int i = 0; i < size; i++)	
 		{
-			/* 9.44 become 943.99 after multiplying by 100.0
-			 * examine later
-			float temp;
-			// 9.44 become 943 in this way
-			scanf("%f", &temp); // don't forget &
-			temp *= 100;	
-			printf("temp is %f\n", temp);
-			costs[i] = temp * 100; // .00 * 100 make num integer
-			printf("before %d\n : ", costs[i]);
-			sum += costs[i];
-			*/
 			int dollar;
 			int cent;
 			scanf("%d.%d", &dollar, &cent);
@@ -54,7 +42,7 @@ int main()
 			if (difference >= 0)
 				positive += ((int)difference) / 100.0;
 			else
-				negative += -1.0*(((int)difference) / 100.0);
+				negative += -((int)difference) / 100.0;
 		}
 
 		// explain why later
