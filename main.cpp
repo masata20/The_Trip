@@ -21,6 +21,7 @@ int main()
 		// calculate sum at the same time
 		for (int i = 0; i < size; i++)	
 		{
+			// Treat cost as inters to avoid decimal rounding confusion
 			int dollar;
 			int cent;
 			scanf("%d.%d", &dollar, &cent);
@@ -29,7 +30,9 @@ int main()
 		}
 
 		// get average cost
-		// don't forget change size to float
+		// use double to have more accurate decimals
+		// ex: .200000000000001 .19999999999.....
+		// refer: https://stackoverflow.com/questions/33983827/choosing-between-float-and-double
 		double average_cost = (double)sum / (double)size;
 
 		// needs to be float since it store with original formant dollar.cents
@@ -38,17 +41,18 @@ int main()
 		for (int i = 0; i < size; i++)
 		{
 			// want to ignore the .decimals so change to int
-			double difference = costs[i] - average_cost;
+			int difference = costs[i] - average_cost;
 			if (difference >= 0)
-				positive += ((int)difference) / 100.0;
+				positive += difference / 100.0;
 			else
-				negative += -((int)difference) / 100.0;
+				negative += -(difference) / 100.0;
 		}
 
-		// explain why later
+		// needs to be examine 
 		if (positive > negative)
 			printf("$%.2f\n", positive);
 		else
 			printf("$%.2f\n", negative);
 	}
-return 0; }
+	return 0;
+}
