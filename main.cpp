@@ -23,27 +23,32 @@ int main()
 		for (int i = 0; i < size; i++)	
 		{
 			float temp;
+			// 9.44 become 943 in this way
 			scanf("%f", &temp); // don't forget &
 			costs[i] = temp * 100; // .00 * 100 make num integer
+			printf("before %d\n : ", costs[i]);
 			sum += costs[i];
 		}
 
 		// get average cost
 		// don't forget change size to float
-		float average_cost = sum / (float)size;
+		float average_cost = (float)sum / (float)size;
 
 		// needs to be float since it store with original formant dollar.cents
 		float positive = 0.0, negative = 0.0;
 
+		for (int i = 0; i < size; i++) {
+			         printf("after : $%d\n", costs[i]);
+		 }
 
 		for (int i = 0; i < size; i++)
 		{
 			// want to ignore the .decimals so change to int
-			int difference = costs[i] - average_cost;
-			if (difference > 0)
-				positive += difference / 100.0;
+			float difference = costs[i] - average_cost;
+			if (difference >= 0)
+				positive += ((int)difference) / 100.0;
 			else
-				negative += -1*(difference / 100.0);
+				negative += -1.0*(((int)difference) / 100.0);
 		}
 
 		// explain why later
